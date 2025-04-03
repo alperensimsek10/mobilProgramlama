@@ -1,6 +1,6 @@
 import 'package:finans_takipp/core/app_bindings.dart';
-import 'package:finans_takipp/modules/home/home_page.dart';
 import 'package:finans_takipp/routes/app_pages_.dart';
+import 'package:finans_takipp/themes/app_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -17,15 +17,13 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return GetMaterialApp(
       title: 'Flutter Demo',
-
       getPages: AppPages.pages,
+      debugShowCheckedModeBanner: false,
       initialRoute: AppRoutes.INITAL,
+      darkTheme: AppTheme.darkTheme,
+      theme: AppTheme.lightTheme,
       initialBinding: AppBindings(),
-      theme: ThemeData(
 
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-        useMaterial3: true,
-      ),
       
     );
   }
