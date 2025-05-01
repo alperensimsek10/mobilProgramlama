@@ -1,5 +1,18 @@
 import 'package:flutter/material.dart';
 
+final List<String> icons = [
+  'wallet',
+  'cash',
+  'trending-up',
+  'cart',
+  'receipt',
+  'bus',
+  'medical',
+  'school',
+  'game-controller',
+  'restaurant',
+];
+
 IconData getCategoryIcon({
   required String iconName,
   required bool isSystem,
@@ -35,6 +48,6 @@ IconData getCategoryIcon({
       return Icons.category;
   }
 
-  
+  // // Kullanıcı tanımlı kategoriler için tip bazlı varsayılan ikonlar
   // return type == 'expense' ? Icons.remove_circle_outline : Icons.add_circle_outline;
 }

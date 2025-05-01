@@ -1,20 +1,22 @@
+import 'package:flutter/material.dart';
 import 'package:finans_takipp/core/base_controller.dart';
-import 'package:finans_takipp/dashboard/dashboard_controller.dart';
 import 'package:finans_takipp/models/app_category.dart';
 import 'package:finans_takipp/models/transaction_params.dart';
+import 'package:finans_takipp/dashboard/dashboard_controller.dart';
 import 'package:finans_takipp/repositories/category_repository.dart';
 import 'package:finans_takipp/repositories/transaction_repository.dart';
-import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
+import 'package:get/instance_manager.dart';
+import 'package:get/state_manager.dart';
 
 class TransactionController extends BaseController {
   final CategoryRepository _categoryRepository = Get.find<CategoryRepository>();
-  final TransactionRepository _transactionRepository = Get.find<TransactionRepository>();
+  final TransactionRepository _transactionRepository =
+      Get.find<TransactionRepository>();
 
   final categories = <AppCategory>[].obs;
   final selectedCategoryId = "".obs;
-  final TransactionType = 'expense'.obs;
+  final transactionType = 'expense'.obs;
   final formKey = GlobalKey<FormState>();
   final amount = 0.0.obs;
   final description = "".obs;
@@ -25,8 +27,9 @@ class TransactionController extends BaseController {
     super.onInit();
     loadCategories();
 
-    ever(TransactionType, 
-      (_) {
+    ever(
+      transactionType,
+      (callback) {
         getFirstCategory();
       },
     );
@@ -35,35 +38,26 @@ class TransactionController extends BaseController {
   Future createTransaction() async {
     try {
       setLoading(true);
-
-      
-      if (!formKey.currentState!.validate()) {
-        setLoading(false);
-        return;
-      }
-
+      if (!formKey.currentState!.validate()) return null;
       final transaction = Transaction(
         id: '',
         amount: amount.value,
         description: description.value,
-        type: TransactionType.value,
+        type: transactionType.value,
         date: date.value,
         categoryId: selectedCategoryId.value,
         userId: '',
       );
-
       var result = await _transactionRepository.createTransaction(transaction);
       print(result.id);
-      if (result != null) {
+      if (result.id != null) {
         await Get.find<DashboardController>().refreshDashboard();
         Get.back();
 
-        showSuccessSnackbar(message: 'Transaction Eklendi');
-        
+        showSuccessSnackbar(message: 'Transaction eklendi');
       }
-
     } catch (e) {
-      showErrorSnackbar(message: 'Transaction Eklenirken Hata Çıktı');
+      showErrorSnackbar(message: 'Transaction eklenirken hata çıktı');
     } finally {
       setLoading(false);
     }
@@ -86,7 +80,7 @@ class TransactionController extends BaseController {
 
   void getFirstCategory() {
     final filteredCategories = categories
-        .where((category) => category.type == TransactionType.value)
+        .where((category) => category.type == transactionType.value)
         .toList();
     if (filteredCategories.isNotEmpty) {
       selectedCategoryId.value = filteredCategories.first.id!;
@@ -99,7 +93,7 @@ class TransactionController extends BaseController {
     amount.value = 0.0;
     description.value = '';
     date.value = DateTime.now();
-    TransactionType.value = 'expense';
+    transactionType.value = 'expense';
     selectedCategoryId.value = '';
   }
 }

@@ -1,10 +1,9 @@
-
-
-import 'package:finans_takipp/modules/transaction/controllers/transaction_controller.dart';
 import 'package:flutter/material.dart';
-import 'package:get/state_manager.dart';
+import 'package:get/get_state_manager/get_state_manager.dart';
 
-class DescriptionInput extends GetView<TransactionController>{
+import '../controllers/transaction_controller.dart';
+
+class DescriptionInput extends GetView<TransactionController> {
   const DescriptionInput({super.key});
 
   @override
@@ -14,20 +13,18 @@ class DescriptionInput extends GetView<TransactionController>{
         labelText: 'Açıklama',
         border: OutlineInputBorder(),
         prefixIcon: Icon(Icons.description_outlined),
-        
       ),
       maxLines: 2,
       onChanged: (value) {
         controller.description.value = value;
       },
       validator: (value) {
-        if(value == null || value.isEmpty){
-          return "Bir Açıklama Giriniz";
+        if (value == null || value.isEmpty) {
+          return "Bir açıklama giriniz";
         }
+
         return null;
-        
       },
     );
   }
-
 }

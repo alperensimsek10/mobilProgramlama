@@ -5,7 +5,7 @@ import 'package:get/get.dart';
 import 'package:get/state_manager.dart';
 
 class TransactionRepository extends GetxService {
-  late ApiService _apiService; // 'final' kaldırıldı
+  late ApiService _apiService; 
 
   @override
   void onInit() {

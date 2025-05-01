@@ -19,8 +19,9 @@ class MyApp extends StatelessWidget {
       title: 'Flutter Demo',
       getPages: AppPages.pages,
       debugShowCheckedModeBanner: false,
-      initialRoute: AppRoutes.INITAL,
+      initialRoute: AppRoutes.INITIAL,
       darkTheme: AppTheme.darkTheme,
+      themeMode: ThemeMode.system,
       theme: AppTheme.lightTheme,
       initialBinding: AppBindings(),
 

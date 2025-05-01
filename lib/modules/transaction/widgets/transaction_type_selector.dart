@@ -1,5 +1,5 @@
 
-import 'package:finans_takipp/modules/transaction/transaction_controller.dart';
+import 'package:finans_takipp/modules/transaction/controllers/transaction_controller.dart';
 import 'package:finans_takipp/themes/app_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -18,10 +18,11 @@ class TransactionTypeSelector  extends GetView<TransactionController>{
           value: 'income', label: Text('Gelir'),
           icon: Icon(Icons.add_circle_outline)),
       ], selected: {
-        controller.TransactionType.value
+        controller.transactionType.value
+
         },
         onSelectionChanged: (selection) {
-          controller.TransactionType.value = selection.first;
+          controller.transactionType.value= selection.first;
         },
         style : ButtonStyle(
           backgroundColor: WidgetStateColor.resolveWith((states) {

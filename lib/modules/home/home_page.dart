@@ -3,10 +3,11 @@ import 'package:finans_takipp/dashboard/dashboard_page.dart';
 import 'package:finans_takipp/modules/home/home_controller.dart';
 import 'package:finans_takipp/profile/profile_page.dart';
 import 'package:finans_takipp/themes/app_colors.dart';
-import 'package:google_fonts/google_fonts.dart'; 
+import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get_state_manager/src/simple/get_view.dart';
-import 'package:get/state_manager.dart';
+import 'package:get/get.dart';
+import '../../dashboard/YillikRaporSayfasi.dart';
+import '../../dashboard/grafik_sayfasi.dart';
 
 class HomePage extends GetView<HomeController> {
   const HomePage({super.key});
@@ -16,15 +17,30 @@ class HomePage extends GetView<HomeController> {
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          "Finans Takip App",
+          "Finza",
           style: GoogleFonts.poppins(color: Colors.white),
         ),
-        backgroundColor: const Color.fromARGB(255, 174, 124, 191), 
+        backgroundColor: const Color.fromARGB(255, 174, 124, 191),
         actions: [
           IconButton(
+            icon: const Icon(Icons.insert_chart_outlined_rounded, color: Colors.white),
+            tooltip: "Raporu Gör",
+            onPressed: () {
+              Get.to(() => YillikRaporSayfasi());
+            },
+          ),
+          IconButton(
+            icon: const Icon(Icons.bar_chart, color: Colors.white),
+            tooltip: "Grafiği Gör",
+            onPressed: () {
+              Get.to(() => GrafikSayfasi());
+            },
+          ),
+          IconButton(
             onPressed: controller.cikisYap,
-            icon: Icon(Icons.logout, color: Colors.white), 
-          )
+            icon: const Icon(Icons.logout, color: Colors.white),
+            tooltip: "Çıkış Yap",
+          ),
         ],
       ),
       body: Obx(
@@ -37,17 +53,20 @@ class HomePage extends GetView<HomeController> {
         ),
       ),
       floatingActionButton: FloatingActionButton(
-      onPressed: controller.gotoTransaction, 
-      backgroundColor: AppColors.darkHotPink,
-      shape: CircleBorder(),
-      child: Icon(Icons.add_rounded, size: 32, color:Colors.white),
+        onPressed: controller.gotoTransaction,
+        backgroundColor: AppColors.darkHotPink,
+        shape: const CircleBorder(),
+        child: const Icon(Icons.add_rounded, size: 32, color: Colors.white),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-      bottomNavigationBar: Obx(()=>
-        AnimatedBottomNavigationBar(
+      bottomNavigationBar: Obx(
+        () => AnimatedBottomNavigationBar(
           gapLocation: GapLocation.center,
           backgroundColor: const Color.fromARGB(255, 174, 124, 191),
-          icons: [Icons.dashboard_customize_outlined,Icons.person],
+          icons: const [
+            Icons.dashboard_customize_outlined,
+            Icons.person,
+          ],
           activeIndex: controller.currentIndex.value,
           splashColor: Colors.white,
           activeColor: Colors.white,
@@ -55,7 +74,8 @@ class HomePage extends GetView<HomeController> {
           leftCornerRadius: 32,
           rightCornerRadius: 32,
           inactiveColor: Colors.white.withAlpha(100),
-          onTap: controller.changePage),
+          onTap: controller.changePage,
+        ),
       ),
     );
   }

@@ -1,10 +1,11 @@
-
-
-import 'package:finans_takipp/modules/transaction/controllers/transaction_controller.dart';
 import 'package:flutter/material.dart';
-import 'package:get/state_manager.dart';
+import 'package:get/get_state_manager/get_state_manager.dart';
 
-class AmountInput extends GetView<TransactionController>{
+import '../controllers/transaction_controller.dart';
+
+
+
+class AmountInput extends GetView<TransactionController> {
   const AmountInput({super.key});
 
   @override
@@ -14,7 +15,6 @@ class AmountInput extends GetView<TransactionController>{
         labelText: 'Miktar',
         border: OutlineInputBorder(),
         prefixIcon: Icon(Icons.money_outlined),
-        
       ),
       keyboardType: TextInputType.numberWithOptions(decimal: true),
       onChanged: (value) {
@@ -22,16 +22,14 @@ class AmountInput extends GetView<TransactionController>{
       },
       validator: (value) {
         if(value == null || value.isEmpty){
-          return "Miktarı Giriniz";
+          return "Miktarı giriniz";
         }
         final amount = double.tryParse(value);
         if(amount == null || amount <=0){
-          return "Geçersiz Veri";
+          return "Geçersiz veri";
         }
         return null;
-
       },
     );
   }
-
 }

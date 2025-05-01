@@ -1,5 +1,5 @@
 
-import 'package:finans_takipp/modules/transaction/transaction_controller.dart';
+import 'package:finans_takipp/modules/transaction/controllers/transaction_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:get/get.dart';

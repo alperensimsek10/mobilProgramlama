@@ -1,6 +1,6 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
     <application
-        android:label="finans_takipp"
+        android:label="Finza"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity

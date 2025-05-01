@@ -1,4 +1,4 @@
-import 'package:finans_takipp/modules/transaction/transaction_controller.dart';
+import 'package:finans_takipp/modules/transaction/controllers/transaction_controller.dart';
 import 'package:finans_takipp/utils/icon_helper.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get_state_manager/get_state_manager.dart';
@@ -17,7 +17,7 @@ class CategoryDropdown extends GetView<TransactionController> {
           ? null 
           : controller.selectedCategoryId.value,
           items: controller.categories
-              .where((cat) => cat.type == controller.TransactionType.value)
+              .where((cat) => cat.type == controller.transactionType.value)
               .map((category) => DropdownMenuItem(
                     value: category.id,
                     child: Row(
